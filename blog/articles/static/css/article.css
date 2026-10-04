@@ -1,0 +1,202 @@
+/* тема «План этажа»: чертежная сетка, таблички-указатели, желтый цвет навигации */
+:root {
+    --paper: #f1f5f6;     /* «бумага» чертежа */
+    --grid: #dbe5e8;      /* линии сетки */
+    --ink: #143039;       /* текст и рамки */
+    --muted: #4f6a73;     /* второстепенный текст */
+    --sign: #f5b700;      /* желтый цвет указателей */
+    --surface: #ffffff;   /* таблички */
+}
+
+/* общие стили страниц */
+body {
+    margin: 0;
+    background-color: var(--paper);
+    /* чертежная сетка */
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+}
+
+.header {
+    position: relative;
+    width: 960px;
+    margin: 28px auto 26px auto;
+    padding-bottom: 16px;
+    border-bottom: 4px solid var(--ink);
+    min-height: 50px;
+}
+
+/* логотип по центру (страница архива) */
+.header img {
+    display: block;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.archive {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+/* запись в списке - табличка торговой точки */
+.one-post {
+    margin-bottom: 26px;
+    padding: 18px 22px;
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--sign);
+}
+
+.post-title {
+    margin: 0 0 12px 0;
+    font-size: 22px;
+}
+
+.post-title a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 3px solid var(--sign);
+}
+
+.post-title a:hover {
+    background: var(--sign);
+}
+
+.article-info {
+    overflow: hidden;
+}
+
+.article-author {
+    width: 50%;
+    float: left;
+    font-weight: bold;
+}
+
+/* срок аренды - темная «бирка» справа */
+.article-created-date {
+    float: right;
+    text-align: right;
+    padding: 3px 10px;
+    background: var(--ink);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.article-details {
+    clear: both;
+    margin: 12px 0 0 0;
+    padding: 8px 0;
+    border-top: 1px solid var(--grid);
+    border-bottom: 1px solid var(--grid);
+    font-size: 15px;
+}
+
+.article-text {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+/* ссылки в правом верхнем углу шапки */
+.header-links {
+    position: absolute;
+    top: 12px;
+    right: 0;
+}
+
+.all-posts {
+    margin-left: 10px;
+    padding: 7px 14px;
+    background: var(--sign);
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.all-posts:hover {
+    background: var(--ink);
+    color: #ffffff;
+}
+
+/* стили страницы одной записи */
+.article .header img {
+    margin-left: 0;
+}
+
+.article .content {
+    box-sizing: border-box;
+    width: 960px;
+    margin: 0 auto 40px auto;
+    padding: 26px 30px;
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--sign);
+}
+
+.article h1 {
+    margin: 0 0 16px 0;
+    font-size: 28px;
+}
+
+.article .article-info {
+    margin-bottom: 10px;
+}
+
+.article .article-details {
+    margin: 0;
+    padding: 9px 0;
+    border-top: none;
+}
+
+.article .article-text {
+    margin-top: 16px;
+}
+
+/* кнопка «свернуть» / «развернуть» */
+.fold-button {
+    float: right;
+    padding: 4px 12px;
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fold-button:hover {
+    background: var(--sign);
+}
+
+/* данные стили применяются только к элементам, у которых родитель
+   с классом one-post имеет также класс folded */
+.one-post.folded .article-author {
+    display: none;
+}
+
+.one-post.folded .article-created-date,
+.one-post.folded .article-details,
+.one-post.folded .article-text {
+    display: none;
+}
+
+.one-post.folded .post-title {
+    margin-bottom: 0;
+}
+
+/* у свернутой таблички желтая «тень» становится серой */
+.one-post.folded {
+    box-shadow: 6px 6px 0 var(--grid);
+}

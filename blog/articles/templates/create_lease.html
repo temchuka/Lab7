@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Оформить договор аренды</title>
+    <link rel="stylesheet" href="{% static 'css/article.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+    <div class="content">
+        <h1>Оформить договор аренды</h1>
+        <p class="errors">{{ form.errors }}</p>
+        <form method="POST">{% csrf_token %}
+            <div class="field">
+                <label>Номер договора</label>
+                <input type="text" name="contract" placeholder="Номер договора" value="{{ form.contract }}">
+            </div>
+            <div class="field">
+                <label>Торговая точка</label>
+                <input type="text" name="outlet" placeholder="Торговая точка" value="{{ form.outlet }}">
+            </div>
+            <div class="field">
+                <label>Этаж</label>
+                <input type="number" name="floor" placeholder="Этаж" value="{{ form.floor }}">
+            </div>
+            <div class="field">
+                <label>Площадь, кв. м</label>
+                <input type="number" step="0.01" name="area" placeholder="Площадь, кв. м" value="{{ form.area }}">
+            </div>
+            <div class="field">
+                <label>Кондиционер</label>
+                <input type="checkbox" name="conditioner" {% if form.conditioner %}checked{% endif %}>
+            </div>
+            <div class="field">
+                <label>Стоимость аренды в день, руб.</label>
+                <input type="number" step="0.01" name="day_price" placeholder="Стоимость аренды в день, руб." value="{{ form.day_price }}">
+            </div>
+            <div class="field">
+                <label>Арендатор</label>
+                <input type="text" name="tenant" placeholder="Арендатор" value="{{ form.tenant }}">
+            </div>
+            <div class="field">
+                <label>Контактное лицо</label>
+                <input type="text" name="contact" placeholder="Контактное лицо" value="{{ form.contact }}">
+            </div>
+            <div class="field">
+                <label>Дата заключения договора</label>
+                <input type="date" name="contract_date" value="{{ form.contract_date }}">
+            </div>
+            <div class="field">
+                <label>Начало аренды</label>
+                <input type="date" name="start_date" value="{{ form.start_date }}">
+            </div>
+            <div class="field">
+                <label>Окончание аренды</label>
+                <input type="date" name="end_date" value="{{ form.end_date }}">
+            </div>
+            <div class="field wide">
+                <label>Сведения об арендаторе</label>
+                <textarea name="text" placeholder="Сведения об арендаторе">{{ form.text }}</textarea>
+            </div>
+            <div class="field wide">
+                <input type="submit" value="Сохранить">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

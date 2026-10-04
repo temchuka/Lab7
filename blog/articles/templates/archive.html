@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Архив договоров аренды</title>
+    <link rel="stylesheet" href="{% static 'css/article.css' %}">
+</head>
+<body class="archive-page">
+    <div class="header">
+        <img src="{% static 'img/logo.png' %}" />
+        <div class="header-links">
+            <a class="all-posts" href="{% url 'register' %}">Регистрация</a>
+            <a class="all-posts" href="{% url 'login' %}">Вход</a>
+        </div>
+    </div>
+    <div class="archive">
+        {% for post in posts %}
+        <div class="one-post">
+            <button class="fold-button">свернуть</button>
+            <h2 class="post-title"><a href="{% url 'get_lease' post.id %}">{{ post.outlet }} (договор № {{ post.contract }})</a></h2>
+            <div class="article-info">
+                <div class="article-author">Арендатор: {{ post.tenant }}</div>
+                <div class="article-created-date">{{ post.start_date }} – {{ post.end_date }}</div>
+            </div>
+            <p class="article-details">Этаж: {{ post.floor }}. Площадь: {{ post.area }} кв. м. Стоимость аренды: {{ post.get_cost }} руб. за {{ post.get_days }} дн.</p>
+            <p class="article-text">{{ post.get_excerpt }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <script src="{% static 'js/helloworld.js' %}"></script>
+    <script src="{% static 'js/fold-post.js' %}"></script>
+</body>
+</html>
